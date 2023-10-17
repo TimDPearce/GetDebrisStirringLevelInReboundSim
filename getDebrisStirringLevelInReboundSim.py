@@ -6,7 +6,7 @@ The program requires Python 3. To analyse a Rebound simulation located at
 e.g. 'exampleSims/exampleSim1.bin', navigate to the directory where this
 code is saved, then in the command line type e.g.
 
-python3 getDebrisStirringLevel.py exampleSims/exampleSim1.bin
+python3 getDebrisStirringLevelInReboundSim.py exampleSims/exampleSim1.bin
 
 ***NOTE: this version requires that all bodies in the Rebound simulation
 were assigned unique hashes when the simulation was set up (see
@@ -25,15 +25,15 @@ checking each debris particle against each other particle (with certain
 criteria) to determine if a collision is possible between these
 particles. If so, then the collision speeds at the orbit-intersection
 points are calculated and compared to the fragmentation speed for the
-particles (of a chosen size, assuming a basalt composition); if the
-collision speed is greater than the fragmentation speed, the particles
-would undergo a destructive collision and are considered stirred. If
-particles are scattered (i.e. their semimajor axes change by a
-significant amount), they are also considered stirred. All remaining
-particles are considered unstirred. The particles are binned
-by semimajor axis into these three possibilities (stirred, unstirred,
-scattered). The script can display the results as a plot, save the plot,
-and also save the data to a CSV file.
+particles (of a chosen size, assuming a basalt composition by default);
+if the collision speed is greater than the fragmentation speed, the
+particles would undergo a destructive collision and are classified as
+stirred. If particles are scattered (i.e. their semimajor axes change by
+a significant amount), then they are classified as scattered. All
+remaining particles are classified as unstirred. The code outputs the
+total numbers of stirred, scattered and unstirred debris bodies, and also
+bins them by initial semimajor axis. The code can display the results as
+a plot, save the plot, and also save the data to CSV files.
 
 You can change specific analysis values in the "User Inputs" section
 below; no other part of the code should need to be changed. The default 
