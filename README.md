@@ -2,7 +2,7 @@ Python program to quantify the level of debris stirring in a Rebound n-body simu
 
 The program requires Python 3. To analyse a Rebound simulation located at e.g. 'exampleSims/exampleSim1.bin', navigate to the directory where this code is saved, then in the command line type e.g.
 
-python3 getDebrisStirringLevel.py exampleSims/exampleSim1.bin
+python3 getDebrisStirringLevelInReboundSim.py exampleSims/exampleSim1.bin
 
 ***NOTE: this version requires that all bodies in the Rebound simulation were assigned unique hashes when the simulation was set up (see https://rebound.readthedocs.io/en/latest/ipython_examples/UniquelyIdentifyingParticlesWithHashes/ for details). This is because hashing safely identifies particles even if they get removed or their order rearranged during a simulation. It also requires that the Rebound simulation units are au, yr and mSun; this is set in the simulation by using sim.units = ('yr', 'AU', 'Msun'). Future versions of this code may allow unhashed bodies and arbitrary units, if there is sufficient demand to implement this.***
 
