@@ -1,5 +1,7 @@
 Python program to quantify the level of debris stirring in a Rebound n-body simulation, by Tyson Costa and Tim Pearce. The code was originally used in Costa, Pearce & Krivov (2023).
 
+To access the program, first download and unpack the ZIP file (press the green 'Code' button on GitHub, then 'Download ZIP', then unzip the file on your computer).
+
 The program requires Python 3. To analyse a Rebound simulation located at e.g. 'exampleSims/exampleSim1.bin', navigate to the directory where this code is saved, then in the command line type e.g.
 
 python3 getDebrisStirringLevelInReboundSim.py exampleSims/exampleSim1.bin
