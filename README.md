@@ -1,4 +1,5 @@
-**A user has identified a possible bug in this code. Caution is advised whilst I check it out. I will remove this message when it's safe.**
+
+**-A user has identified a possible bug in this code. Caution is advised whilst I check it out. I will remove this message when it's safe.-**
 
 Python program to quantify the level of debris stirring in a Rebound n-body simulation, by Tyson Costa and Tim Pearce. The code was originally used in Costa, Pearce & Krivov (2023).
 
