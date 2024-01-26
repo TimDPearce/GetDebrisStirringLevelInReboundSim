@@ -42,6 +42,15 @@ The fragmentation-speed prescription is defined in the function
 GetFragmentationSpeedForBasalt(); replace this if you want a different
 material or prescription.
 
+
+***
+BUG NOTE: A previous version of this code contained a bug, which
+caused the collision velocity to be overestimated roughly 50% of the
+time. This bug was corrected on 26/1/24. We thank Marcy Best and Antranik
+Sefilian for spotting it.
+***
+
+
 Feel free to use this program to quantify stirring for your own Rebound
 simulations. If the results go into a publication, then please cite 
 Costa, Pearce & Krivov (2023). Please let the authors know if you find
@@ -439,9 +448,11 @@ def CalculateCollisionVelocities_mPerS(particle1,particle2,centralMass_mSun):
 	# can check the velocities
 	if orbitCrossingCondition_au2 >= 0:
 
-		# Calculate the two solutions for the angle
-		theta1_rad = np.arccos((-A_au*B_au+C_au*np.sqrt(orbitCrossingCondition_au2))/(B_au**2+C_au**2))
-		theta2_rad = np.arccos((-A_au*B_au-C_au*np.sqrt(orbitCrossingCondition_au2))/(B_au**2+C_au**2))
+		cosTheta1 = (-A_au*B_au + C_au*np.sqrt(orbitCrossingCondition_au2))/(B_au**2+C_au**2)
+		cosTheta2 = (-A_au*B_au - C_au*np.sqrt(orbitCrossingCondition_au2))/(B_au**2+C_au**2)
+
+		theta1_rad = GetThetaFromCosThetaInCorrectQuadrant(cosTheta1, A_au, B_au, C_au)
+		theta2_rad = GetThetaFromCosThetaInCorrectQuadrant(cosTheta2, A_au, B_au, C_au)
 
 		# Calculate the value of r (the intersection point) for each 
 		# solution
@@ -459,6 +470,25 @@ def CalculateCollisionVelocities_mPerS(particle1,particle2,centralMass_mSun):
 		collisionSpeed2_mPerS = 0
 
 	return collisionSpeed1_mPerS, collisionSpeed2_mPerS
+
+#------------------------------------------------------------------------
+def GetThetaFromCosThetaInCorrectQuadrant(cosTheta, A_au, B_au, C_au):
+	'''Get theta from cosTheta. Takes account of the correct quadrant'''
+	
+	# Calculate sin(theta)
+	sinTheta = (-A_au-B_au*cosTheta) / C_au
+
+	# Get solution to cosTheta in 0 < theta < pi
+	arccosTheta0ToPi_rad = np.arccos(cosTheta)
+	
+	# Determine which quadrant theta is in
+	if sinTheta >= 0:
+		theta_rad = arccosTheta0ToPi_rad
+	
+	else:
+		theta_rad = -arccosTheta0ToPi_rad	
+
+	return theta_rad
 
 #------------------------------------------------------------------------
 def PrintSimParameters(debrisBodies, nonDebrisBodies):
