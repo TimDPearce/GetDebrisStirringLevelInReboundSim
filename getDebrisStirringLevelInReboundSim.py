@@ -46,7 +46,7 @@ material or prescription.
 ***
 BUG NOTE: A previous version of this code contained a bug, which
 caused the collision velocity to be overestimated roughly 50% of the
-time. This bug was corrected on 26/1/24. We thank Marcy Best and Antranik
+time. This bug was corrected on 26/01/2024. We thank Marcy Best and Antranik
 Sefilian for spotting it.
 ***
 
